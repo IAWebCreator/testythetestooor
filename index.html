@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testy the Testooor - Meme Token</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #FFD700;
+            --secondary-color: #4169E1;
+            --accent-color: #FF4500;
+            --text-color: #333;
+            --background-color: #F0F8FF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-right: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .hero {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎓</text></svg>') 0 0 / 100px 100px;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .about, .tokenomics, .how-to-buy, .roadmap {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .about::before, .tokenomics::before, .how-to-buy::before, .roadmap::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">📝</text></svg>') 0 0 / 100px 100px;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .tokenomics-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .tokenomics-item {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: calc(25% - 20px);
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .tokenomics-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .tokenomics-item i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .how-to-buy-steps {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .step {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: calc(50% - 20px);
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .roadmap-timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--secondary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .roadmap-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .roadmap-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -17px;
+            background-color: var(--primary-color);
+            border: 4px solid var(--secondary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            right: 30px;
+            border: medium solid var(--secondary-color);
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--secondary-color);
+        }
+
+        .right::before {
+            content: " ";
+            height: 0;
+            position: absolute;
+            top: 22px;
+            width: 0;
+            z-index: 1;
+            left: 30px;
+            border: medium solid var(--secondary-color);
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--secondary-color) transparent transparent;
+        }
+
+        .right::after {
+            left: -16px;
+        }
+
+        .roadmap-content {
+            padding: 20px 30px;
+            background-color: #fff;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .token-address {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .token-address span {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .token-address i {
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .token-address i:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .tokenomics-item, .step {
+                width: calc(50% - 20px);
+            }
+
+            .roadmap-timeline::after {
+                left: 31px;
+            }
+
+            .roadmap-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .roadmap-item::before {
+                left: 60px;
+                border: medium solid var(--secondary-color);
+                border-width: 10px 10px 10px 0;
+                border-color: transparent var(--secondary-color) transparent transparent;
+            }
+
+            .left::after, .right::after {
+                left: 15px;
+            }
+
+            .right {
+                left: 0%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" alt="Testy Logo">
+                Testy the Testooor
+            </a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#how-to-buy">How to Buy</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Testy the Testooor</h1>
+                <p>The meme coin that's putting the fun back in the fundamentals! Join the quirkiest test ever conceived in the crypto meta.</p>
+                <a href="#how-to-buy" class="cta-button">Get TESTY Now!</a>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Testy</h2>
+                <p>Testy the Testooor is not just another meme coin – it's a celebration of resilience, learning, and the wild world of crypto! Imagine your favorite celebrity taking the ultimate test of crypto knowledge, now in coin form. We're here to laugh, learn, and potentially earn together.</p>
+            </div>
+        </section>
+
+        <section id="tokenomics" class="tokenomics">
+            <div class="container">
+                <h2 class="section-title">Tokenomics</h2>
+                <div class="tokenomics-list">
+                    <div class="tokenomics-item">
+                        <i class="fas fa-coins"></i>
+                        <h3>Total Supply</h3>
+                        <p>1,000,000,000,000 TESTY</p>
+                    </div>
+                    <div class="tokenomics-item">
+                        <i class="fas fa-lock"></i>
+                        <h3>Liquidity Lock</h3>
+                        <p>80% locked for 1 year</p>
+                    </div>
+                    <div class="tokenomics-item">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>Transaction Fee</h3>
+                        <p>5% (2% redistribution, 3% to liquidity)</p>
+                    </div>
+                    <div class="tokenomics-item">
+                        <i class="fas fa-fire"></i>
+                        <h3>Token Burn</h3>
+                        <p>1% of supply burned quarterly</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-to-buy" class="how-to-buy">
+            <div class="container">
+                <h2 class="section-title">How to Buy</h2>
+                <div class="how-to-buy-steps">
+                    <div class="step">
+                        <i class="fas fa-wallet"></i>
+                        <h3>Step 1: Get a Wallet</h3>
+                        <p>Download a reputable Ethereum wallet like MetaMask or Trust Wallet.</p>
+                    </div>
+                    <div class="step">
+                        <i class="fas fa-coins"></i>
+                        <h3>Step 2: Acquire ETH</h3>
+                
